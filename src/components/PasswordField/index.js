@@ -1,7 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Import utils
 import { getClassName, getIcon } from "../../utils/utils.form";
+
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Eye/Eye-slash icon
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 // helper function
 const checkPassword = (password) => {
@@ -35,6 +41,9 @@ export default function PasswordField({
   const password = useRef("");
   const confirmPassword = useRef("");
 
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
   return (
     <>
       <div className="form__input">
@@ -42,7 +51,7 @@ export default function PasswordField({
           Password
         </label>
         <input
-          type="password"
+          type={isPasswordVisible ? "text" : "password"}
           name="password"
           id="password"
           placeholder="Password"
@@ -74,6 +83,12 @@ export default function PasswordField({
             }
           }}
         />
+        <span
+          className="reveal-password"
+          onClick={() => setPasswordVisible((prev) => !prev)}
+        >
+          <FontAwesomeIcon icon={isPasswordVisible ? faEye : faEyeSlash} />
+        </span>
         <div className={getClassName(status.lenCheck)}>
           {getIcon(status.lenCheck)}
           <span>At least 8 characters</span>
@@ -97,7 +112,7 @@ export default function PasswordField({
             Confirm Password
           </label>
           <input
-            type="password"
+            type={isConfirmPasswordVisible ? "text" : "password"}
             name="confirm-password"
             id="confirm-password"
             placeholder="Confirm Password"
@@ -109,6 +124,14 @@ export default function PasswordField({
               return setConfirmStatus("");
             }}
           />
+          <span
+            className="reveal-password"
+            onClick={() => setConfirmPasswordVisible((prev) => !prev)}
+          >
+            <FontAwesomeIcon
+              icon={isConfirmPasswordVisible ? faEye : faEyeSlash}
+            />
+          </span>
           <div className={getClassName(confirmStatus)}>
             {getIcon(confirmStatus)}
             <span>Passwords match</span>

@@ -46,6 +46,18 @@ form {
   color: rgba(0, 0, 0, 0.6);
 }
 
+.text-center {
+  text-align: center;
+}
+
+.reveal-password {
+  opacity: 0.5;
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  transform: translate(-200%, 150%);
+}
+
 a,
 a:visited {
   text-decoration: none;
@@ -137,6 +149,7 @@ a:hover {
   z-index: 99;
   border-radius: 0.3rem;
   display: flex;
+  gap: 20px;
   pointer-events: all;
   flex-direction: column;
   align-items: center;
